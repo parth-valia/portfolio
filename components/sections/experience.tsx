@@ -1,284 +1,230 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, TrendingUp, Award, Terminal, Code2, Zap } from 'lucide-react';
+import { Briefcase, Calendar, TrendingUp, Award, MapPin, Code2, Zap, Building, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { TerminalWindow } from '@/components/ui/terminal-window';
+import { MagneticHover } from '@/components/ui/magnetic-hover';
 
 const experiences = [
   {
-    title: 'Senior React Native Developer',
-    company: 'Tech Solutions Inc.',
-    period: '2022 - Present',
+    title: 'React Native Developer',
+    company: 'Corenet Tech',
+    period: 'Apr 2025 - Present',
     location: 'Mumbai, India',
     type: 'Full-time',
-    description: 'Led development of cross-platform mobile applications serving 100K+ users. Reduced crash rates by 30% and improved app performance significantly.',
+    description: 'Launched 3 production-grade React Native applications, boosting monthly active users by 22%. Accelerated app responsiveness by 35% through load time reduction and optimized rendering logic.',
     achievements: [
-      'Reduced app crash rate from 2.1% to 1.4%',
-      'Improved app load time by 40%',
-      'Led team of 4 developers',
-      'Implemented CI/CD pipeline'
+      'Launched 3 production-grade React Native applications',
+      'Boosted monthly active users by 22%',
+      'Accelerated app responsiveness by 35%',
+      'Reduced churn by 18% through UX workflow improvements'
     ],
-    technologies: ['React Native', 'TypeScript', 'Redux Toolkit', 'AWS', 'Firebase'],
+    technologies: ['JavaScript', 'TypeScript', 'React Native', 'Redux', 'Expo', 'REST APIs', 'Firebase', 'AWS CLI'],
     color: 'from-blue-500 to-cyan-500',
     bgColor: 'from-blue-50/50 to-cyan-50/50 dark:from-blue-950/20 dark:to-cyan-950/20',
   },
   {
     title: 'React Native Developer',
-    company: 'Mobile First Agency',
-    period: '2021 - 2022',
-    location: 'Remote',
-    type: 'Contract',
-    description: 'Developed and maintained multiple client applications with focus on performance optimization and user experience.',
+    company: 'Shri Hari Info Solutions',
+    period: 'Nov 2022 - Mar 2025',
+    location: 'Ahmedabad, India',
+    type: 'Full-time',
+    description: 'Developed and scaled applications across retail, agri-tech, and spiritual sectors, driving a 40% increase in total installs. Reduced app instability by resolving memory leaks and optimizing resource usage.',
     achievements: [
-      'Delivered 5+ mobile applications',
-      'Achieved 4.8+ app store ratings',
-      'Implemented offline-first architecture',
-      'Mentored junior developers'
+      'Drove 40% increase in total installs',
+      'Reduced app instability through memory leak resolution',
+      'Improved responsiveness and reliability',
+      'Implemented push notifications via FCM'
     ],
-    technologies: ['React Native', 'JavaScript', 'Zustand', 'REST APIs', 'Push Notifications'],
+    technologies: ['JavaScript', 'TypeScript', 'React Native', 'React.js', 'Next.js', 'Redux', 'Firebase', 'Blockchain'],
     color: 'from-purple-500 to-pink-500',
     bgColor: 'from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20',
-  },
-  {
-    title: 'Junior Mobile Developer',
-    company: 'StartupXYZ',
-    period: '2020 - 2021',
-    location: 'Mumbai, India',
-    type: 'Full-time',
-    description: 'Started career in mobile development, working on React Native applications and learning industry best practices.',
-    achievements: [
-      'Built first production mobile app',
-      'Learned React Native ecosystem',
-      'Collaborated with design team',
-      'Implemented responsive designs'
-    ],
-    technologies: ['React Native', 'JavaScript', 'Redux', 'AsyncStorage', 'Native Modules'],
-    color: 'from-green-500 to-emerald-500',
-    bgColor: 'from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20',
   },
 ];
 
 const skills = [
-  { name: 'React Native', level: 95, category: 'Frontend' },
-  { name: 'TypeScript', level: 90, category: 'Language' },
-  { name: 'Redux Toolkit', level: 85, category: 'State Management' },
-  { name: 'AWS Services', level: 80, category: 'Cloud' },
-  { name: 'Firebase', level: 85, category: 'Backend' },
-  { name: 'REST APIs', level: 90, category: 'Integration' },
-  { name: 'Push Notifications', level: 85, category: 'Features' },
-  { name: 'Performance Optimization', level: 88, category: 'Optimization' },
+  { name: 'React Native', level: 95, category: 'Frontend', icon: '⚛️' },
+  { name: 'TypeScript', level: 90, category: 'Language', icon: '🔷' },
+  { name: 'Redux Toolkit', level: 85, category: 'State Management', icon: '🔄' },
+  { name: 'AWS Services', level: 80, category: 'Cloud', icon: '☁️' },
+  { name: 'Firebase', level: 85, category: 'Backend', icon: '🔥' },
+  { name: 'REST APIs', level: 90, category: 'Integration', icon: '🔗' },
+  { name: 'Push Notifications', level: 85, category: 'Features', icon: '📱' },
+  { name: 'Performance Optimization', level: 88, category: 'Optimization', icon: '⚡' },
 ];
 
 export function ExperienceSection() {
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
-      {/* Clean Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-black to-gray-950" />
+    <section className="relative overflow-hidden">
+      {/* Background floating elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-32 right-20 w-64 h-64 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-32 left-20 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }} />
+      </div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center space-y-6 mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4 mb-16"
         >
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <Terminal className="h-6 w-6 text-matrix-green" />
-            <span className="text-matrix-green font-mono text-sm uppercase tracking-wider">
-              CAREER_PATH.EXE
-            </span>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-400 border border-purple-200 dark:border-purple-800/50">
+            <Briefcase className="h-4 w-4" />
+            <span className="text-sm font-medium">Experience</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-display">
-            Professional{' '}
-            <span className="text-cyber-blue font-mono">Timeline</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+            Professional Journey
           </h2>
           
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
-            {'>'} 2.8+ years of building exceptional mobile experiences with cutting-edge tech
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            2.8+ years of building high-performance mobile applications and delivering measurable business impact.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {/* Experience Timeline */}
-          <div className="lg:col-span-2">
+        {/* Experience Timeline */}
+        <div className="space-y-6 lg:space-y-8 mb-16">
+          {experiences.map((exp, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={index}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="mb-8"
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="relative group"
             >
-              <TerminalWindow title="work_history.log">
-                <div className="flex items-center space-x-3">
-                  <Briefcase className="h-5 w-5 text-matrix-green" />
-                  <span className="text-matrix-green font-mono text-lg">PROFESSIONAL EXPERIENCE</span>
-                </div>
-              </TerminalWindow>
-            </motion.div>
-            
-            <div className="space-y-6">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  className="group"
-                >
-                  <TerminalWindow title={`${exp.company.toLowerCase().replace(/\s+/g, '_')}_${exp.period.split(' - ')[0]}.job`}>
-                    <div className="space-y-4">
-                      {/* Job Header */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 rounded-full bg-matrix-green animate-pulse"></div>
-                          <span className="text-matrix-green font-mono text-xs">
-                            {exp.type.toUpperCase()}
-                          </span>
+              <MagneticHover strength={0.2}>
+                <Card className={`relative overflow-hidden border-0 bg-gradient-to-br ${exp.bgColor} backdrop-blur-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group-hover:scale-[1.02]`}>
+                  <CardContent className="p-4 sm:p-6 lg:p-8">
+                    <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
+                      {/* Company Info */}
+                      <div className="flex-shrink-0">
+                        <motion.div 
+                          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-r ${exp.color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}
+                          whileHover={{ rotate: 5 }}
+                        >
+                          <Building className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                        </motion.div>
+                        <div className="space-y-2">
+                          <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">{exp.title}</h3>
+                          <p className="text-base sm:text-lg font-semibold text-muted-foreground">{exp.company}</p>
+                          <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
+                            <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                            {exp.period}
+                          </div>
+                          <div className="flex items-center text-xs sm:text-sm text-muted-foreground">
+                            <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                            {exp.location}
+                          </div>
+                          <Badge variant="secondary" className="w-fit text-xs">
+                            {exp.type}
+                          </Badge>
                         </div>
-                        <Badge className="bg-cyber-blue/20 text-cyber-blue border-cyber-blue/30 font-mono text-xs">
-                          {exp.period}
-                        </Badge>
                       </div>
 
-                      {/* Job Details */}
-                      <div className="space-y-3">
-                        <div>
-                          <h4 className="text-xl font-semibold text-white font-display group-hover:text-matrix-green transition-colors">
-                            {exp.title}
-                          </h4>
-                          <p className="text-cyber-blue font-mono text-sm mt-1">
-                            @ {exp.company} • {exp.location}
-                          </p>
-                        </div>
-
-                        <p className="text-gray-300 text-sm leading-relaxed">
+                      {/* Experience Details */}
+                      <div className="flex-1 space-y-4">
+                        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                           {exp.description}
                         </p>
 
-                        {/* Achievements */}
                         <div>
-                          <h5 className="text-matrix-green font-mono text-sm mb-2 flex items-center">
-                            <Zap className="mr-2 h-4 w-4" />
-                            KEY_ACHIEVEMENTS:
-                          </h5>
+                          <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center">
+                            <Award className="mr-2 h-4 w-4 text-yellow-600" />
+                            Key Achievements
+                          </h4>
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {exp.achievements.map((achievement, i) => (
-                              <div key={i} className="flex items-start space-x-2 text-xs">
-                                <span className="text-matrix-green font-mono mt-1">{'>'}</span>
-                                <span className="text-gray-300">{achievement}</span>
-                              </div>
+                              <motion.div 
+                                key={i} 
+                                className="flex items-start gap-2 text-sm"
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></div>
+                                <span className="text-muted-foreground">{achievement}</span>
+                              </motion.div>
                             ))}
                           </div>
                         </div>
 
-                        {/* Technologies */}
                         <div>
-                          <h5 className="text-cyber-blue font-mono text-sm mb-2 flex items-center">
-                            <Code2 className="mr-2 h-4 w-4" />
-                            TECH_STACK:
-                          </h5>
-                          <div className="flex flex-wrap gap-1">
-                            {exp.technologies.map((tech) => (
-                              <span
+                          <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center">
+                            <Code2 className="mr-2 h-4 w-4 text-blue-600" />
+                            Technologies
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {exp.technologies.map((tech, techIndex) => (
+                              <motion.span
                                 key={tech}
-                                className="px-2 py-1 bg-matrix-gray-dark border border-matrix-green-dark text-matrix-green font-mono text-xs rounded hover:border-matrix-green transition-colors"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: techIndex * 0.05 }}
+                                className="px-2 py-1 bg-muted/50 hover:bg-primary/10 text-muted-foreground hover:text-primary text-xs rounded-md font-medium transition-all duration-300 cursor-default"
                               >
                                 {tech}
-                              </span>
+                              </motion.span>
                             ))}
                           </div>
                         </div>
                       </div>
                     </div>
-                  </TerminalWindow>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  </CardContent>
+                </Card>
+              </MagneticHover>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Skills */}
-          <div>
+        {/* Skills Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4 mb-12"
+        >
+          <h3 className="text-2xl font-bold text-foreground">Technical Skills</h3>
+          <p className="text-muted-foreground">Core technologies and proficiency levels</p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {skills.map((skill, index) => (
             <motion.div
+              key={skill.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="mb-8"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <TerminalWindow title="skill_matrix.sys">
-                <div className="flex items-center space-x-3">
-                  <TrendingUp className="h-5 w-5 text-cyber-blue" />
-                  <span className="text-cyber-blue font-mono text-lg">TECHNICAL PROFICIENCY</span>
-                </div>
-              </TerminalWindow>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="sticky top-24"
-            >
-              <TerminalWindow title="skills.json">
-                <div className="space-y-4">
-                  {skills.map((skill, index) => (
+              <Card className="border border-border/50 hover:border-border hover:shadow-lg transition-all duration-300 bg-card">
+                <CardContent className="p-4 text-center">
+                  <div className="text-2xl mb-2">{skill.icon}</div>
+                  <h4 className="font-semibold text-foreground mb-1">{skill.name}</h4>
+                  <Badge variant="outline" className="text-xs mb-3">
+                    {skill.category}
+                  </Badge>
+                  <div className="w-full bg-muted rounded-full h-2 mb-2">
                     <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
-                      transition={{ delay: 0.8 + index * 0.1 }}
-                      className="group"
-                    >
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-white font-mono text-sm">{skill.name}</span>
-                          <Badge className="bg-matrix-green/20 text-matrix-green border-matrix-green/30 font-mono text-xs">
-                            {skill.category}
-                          </Badge>
-                        </div>
-                        <span className="text-cyber-blue font-mono text-sm">{skill.level}%</span>
-                      </div>
-                      
-                      <div className="w-full bg-matrix-gray-dark rounded-full h-2 overflow-hidden">
-                        <motion.div
-                          className="h-2 rounded-full bg-gradient-to-r from-matrix-green via-cyber-blue to-cyber-purple relative"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 1 + index * 0.1, duration: 1, ease: "easeOut" }}
-                        >
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                            animate={{ x: [-100, 200] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                          />
-                        </motion.div>
-                      </div>
-                      
-                      <div className="text-xs text-gray-500 font-mono mt-1">
-                        {skill.level >= 90 ? 'EXPERT' : skill.level >= 80 ? 'ADVANCED' : skill.level >= 70 ? 'INTERMEDIATE' : 'BEGINNER'}
-                      </div>
-                    </motion.div>
-                  ))}
-                  
-                  {/* Terminal Footer */}
-                  <div className="pt-4 border-t border-matrix-gray-dark text-xs font-mono text-gray-500">
-                    <div className="flex justify-between">
-                      <span>Skills evaluated: {skills.length}</span>
-                      <span>Avg proficiency: {Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%</span>
-                    </div>
+                      transition={{ delay: 0.5 + index * 0.1, duration: 1 }}
+                    />
                   </div>
-                </div>
-              </TerminalWindow>
+                  <div className="text-sm font-semibold text-blue-600">
+                    {skill.level}%
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

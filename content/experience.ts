@@ -1,30 +1,31 @@
 import { Experience } from '@/lib/types';
 
-export const experience: Experience[] = [
+export const experiences: Experience[] = [
   {
     company: 'Corenet Tech',
     role: 'React Native Developer',
     period: 'Apr 2025 – Present',
     location: 'Mumbai, India',
     highlights: [
-      'Launched 3 production-grade applications, increasing monthly active users by 22%',
-      'Accelerated responsiveness by 35% via load-time reductions and render optimizations',
-      'Streamlined UX workflows with design/product, reducing churn by 18% in Agile/Scrum',
-      'Mentored junior developers through reviews and pairing, elevating code quality',
+      'Launched 3 production-grade React Native applications, boosting monthly active users by 22%',
+      'Accelerated app responsiveness by 35% through load time reduction and optimized rendering logic',
+      'Worked in an Agile/Scrum environment with designers and product managers to streamline UX workflows, reducing churn by 18%',
+      'Guided junior developers through mentorship and peer code reviews, raising overall code quality',
     ],
-    technologies: ['React Native', 'TypeScript', 'Redux', 'Firebase', 'AWS'],
+    technologies: ['JavaScript', 'TypeScript', 'React Native', 'Redux', 'Expo', 'REST APIs', 'Firebase', 'AWS CLI', 'Google Maps API', 'Payment Gateways'],
   },
   {
     company: 'Shri Hari Info Solutions',
     role: 'React Native Developer',
     period: 'Nov 2022 – Mar 2025',
-    location: 'Mumbai, India',
+    location: 'Ahmedabad, India',
     highlights: [
-      'Drove a 40% increase in total installs across retail, agri‑tech, and spiritual apps',
-      'Resolved memory leaks and applied structured debugging to improve stability',
-      'Refactored critical flows and API integrations to enhance responsiveness and reliability',
-      'Implemented push notifications (FCM) and optimized FlatList rendering to boost engagement',
+      'Developed and scaled applications across retail, agri-tech, and spiritual sectors, driving a 40% increase in total installs',
+      'Reduced app instability by resolving memory leaks, applying structured debugging, and optimizing resource usage',
+      'Improved responsiveness and reliability by refactoring critical app flows and enhancing API integrations',
+      'Collaborated closely with backend teams to reduce API response time and optimize data handling',
+      'Implemented push notifications via Firebase Cloud Messaging and optimized FlatList rendering, improving user engagement',
     ],
-    technologies: ['React Native', 'Redux', 'Firebase', 'Google Maps API', 'FCM'],
+    technologies: ['JavaScript', 'TypeScript', 'React Native', 'React.js', 'Next.js', 'Redux', 'Expo', 'REST APIs', 'Firebase', 'AWS CLI', 'Google Maps API', 'Blockchain', 'Web3'],
   },
 ];

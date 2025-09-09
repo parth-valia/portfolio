@@ -1,29 +1,42 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Calendar, Clock, ArrowRight, BookOpen, TrendingUp } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MagneticHover } from '@/components/ui/magnetic-hover';
-import { blogPosts as postsData } from '@/content/blog';
+import { blogPosts } from '@/content/blog';
 
-const blogPosts = postsData;
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
-export default function BlogPage() {
-  const [searchTerm, setSearchTerm] = useState('');
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as any,
+    },
+  },
+};
 
-  const filteredPosts = blogPosts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.summary.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+export function BlogSection() {
+  // Get the latest 3 blog posts
+  const featuredPosts = blogPosts.slice(0, 3);
 
   return (
-    <div className="py-20 relative overflow-hidden">
+    <section id="blog" className="py-20 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-purple-50/30 to-blue-50/20 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950" />
       
@@ -31,60 +44,45 @@ export default function BlogPage() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-10 w-32 h-32 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-xl animate-float" />
         <div className="absolute bottom-20 left-10 w-40 h-40 bg-gradient-to-r from-blue-400/10 to-cyan-400/10 rounded-full blur-xl animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-indigo-400/5 to-purple-400/5 rounded-full blur-2xl animate-pulse" />
       </div>
-
+      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="text-center space-y-6 mb-16"
         >
           <div className="flex items-center justify-center space-x-3 mb-4">
             <BookOpen className="h-6 w-6 text-purple-600" />
             <span className="text-purple-600 font-medium text-sm uppercase tracking-wider">
-              All Articles
+              Latest Insights
             </span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-purple-800 to-blue-800 dark:from-white dark:via-purple-200 dark:to-blue-200 bg-clip-text text-transparent">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-purple-800 to-blue-800 dark:from-white dark:via-purple-200 dark:to-blue-200 bg-clip-text text-transparent">
             Blog & Articles
-          </h1>
+          </h2>
           
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Insights, tutorials, and deep dives into React Native development, 
-            performance optimization, and mobile app best practices.
+            Deep dives into React Native development, performance optimization, and mobile app best practices.
           </p>
         </motion.div>
 
-        {/* Search */}
+        {/* Featured Posts */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="max-w-md mx-auto mb-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
         >
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
-            <Input
-              placeholder="Search articles..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white/50 dark:bg-slate-800/50 border-slate-300 dark:border-slate-600 focus:border-purple-500 dark:focus:border-purple-400 transition-colors"
-            />
-          </div>
-        </motion.div>
-
-        {/* Blog Posts */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post, index) => (
+          {featuredPosts.map((post, index) => (
             <motion.div
               key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="h-full"
+              variants={itemVariants}
             >
               <MagneticHover>
                 <Card className="group h-full overflow-hidden backdrop-blur-sm bg-white/70 dark:bg-slate-900/70 border-slate-200/50 dark:border-slate-700/50 shadow-xl hover:shadow-2xl transition-all duration-500">
@@ -162,25 +160,33 @@ export default function BlogPage() {
               </MagneticHover>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {filteredPosts.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center py-12"
-          >
-            <p className="text-slate-600 dark:text-slate-400">
-              No articles found matching your search criteria.
-            </p>
-          </motion.div>
-        )}
-
-        {/* Coming Soon */}
+        {/* View All Posts */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center"
+        >
+          <MagneticHover>
+            <Link
+              href="/blog"
+              className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              <span>View All Articles</span>
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </MagneticHover>
+        </motion.div>
+
+        {/* Coming Soon Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
           className="mt-16"
         >
           <Card className="p-8 text-center backdrop-blur-sm bg-gradient-to-br from-purple-50/80 to-blue-50/80 dark:from-purple-950/30 dark:to-blue-950/30 border-purple-200/50 dark:border-purple-800/50 shadow-xl">
@@ -201,6 +207,6 @@ export default function BlogPage() {
           </Card>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }

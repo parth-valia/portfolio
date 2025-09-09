@@ -1,48 +1,52 @@
 import { Skill } from '@/lib/types';
 
 export const skills: Skill[] = [
-  // Core
-  { name: 'JavaScript (ES6+)', level: 95, category: 'Core' },
-  { name: 'TypeScript', level: 90, category: 'Core' },
-  
-  // Mobile
-  { name: 'React Native', level: 95, category: 'Mobile' },
-  { name: 'Expo', level: 85, category: 'Mobile' },
-  { name: 'Redux', level: 90, category: 'Mobile' },
-  { name: 'Zustand', level: 80, category: 'Mobile' },
-  { name: 'Native Modules', level: 75, category: 'Mobile' },
-  { name: 'Hermes', level: 70, category: 'Mobile' },
-  
-  // Web
-  { name: 'React.js', level: 90, category: 'Web' },
-  { name: 'Next.js', level: 85, category: 'Web' },
-  { name: 'Material UI', level: 80, category: 'Web' },
-  { name: 'Styled Components', level: 75, category: 'Web' },
-  { name: 'Tailwind CSS', level: 85, category: 'Web' },
-  
-  // Backend/Infra
-  { name: 'REST APIs', level: 90, category: 'Backend/Infra' },
-  { name: 'Firebase', level: 85, category: 'Backend/Infra' },
-  { name: 'AWS CLI', level: 70, category: 'Backend/Infra' },
-  
-  // Platform
-  { name: 'Google Maps API', level: 80, category: 'Platform' },
-  { name: 'Payment Integrations', level: 75, category: 'Platform' },
-  { name: 'WebSockets', level: 70, category: 'Platform' },
-  
-  // Tooling
-  { name: 'Git', level: 95, category: 'Tooling' },
-  { name: 'GitHub', level: 90, category: 'Tooling' },
-  { name: 'VS Code', level: 95, category: 'Tooling' },
-  { name: 'Postman', level: 85, category: 'Tooling' },
-  { name: 'Sentry', level: 75, category: 'Tooling' },
+  // Core Languages
+  { name: 'JavaScript (ES6+)', level: 95, category: 'Core Languages' },
+  { name: 'TypeScript', level: 90, category: 'Core Languages' },
+  { name: 'HTML', level: 90, category: 'Core Languages' },
+  { name: 'CSS', level: 90, category: 'Core Languages' },
+  { name: 'C/C++', level: 75, category: 'Core Languages' },
+
+  // Mobile Development
+  { name: 'React Native', level: 95, category: 'Mobile Development' },
+  { name: 'Expo', level: 90, category: 'Mobile Development' },
+  { name: 'Redux', level: 85, category: 'Mobile Development' },
+  { name: 'Zustand', level: 80, category: 'Mobile Development' },
+  { name: 'SDK Integrations', level: 85, category: 'Mobile Development' },
+  { name: 'Payment Integrations', level: 80, category: 'Mobile Development' },
+
+  // Web Development
+  { name: 'React.js', level: 90, category: 'Web Development' },
+  { name: 'Next.js', level: 85, category: 'Web Development' },
+  { name: 'Material UI', level: 80, category: 'Web Development' },
+  { name: 'Styled Components', level: 75, category: 'Web Development' },
+  { name: 'Tailwind CSS', level: 85, category: 'Web Development' },
+
+  // Backend & APIs
+  { name: 'REST APIs', level: 90, category: 'Backend & APIs' },
+  { name: 'Firebase', level: 85, category: 'Backend & APIs' },
+  { name: 'AWS CLI', level: 75, category: 'Backend & APIs' },
+  { name: 'Google Maps', level: 80, category: 'Backend & APIs' },
+  { name: 'Web Sockets', level: 75, category: 'Backend & APIs' },
+  { name: 'CI/CD pipelines', level: 70, category: 'Backend & APIs' },
+
+  // Tools & Platforms
+  { name: 'Git', level: 90, category: 'Tools & Platforms' },
+  { name: 'GitHub', level: 90, category: 'Tools & Platforms' },
+  { name: 'VS Code', level: 95, category: 'Tools & Platforms' },
+  { name: 'Postman', level: 85, category: 'Tools & Platforms' },
+  { name: 'Notion', level: 80, category: 'Tools & Platforms' },
+  { name: 'JIRA', level: 75, category: 'Tools & Platforms' },
+  { name: 'Slack', level: 85, category: 'Tools & Platforms' },
+  { name: 'Sentry', level: 80, category: 'Tools & Platforms' },
 ];
 
 export const skillCategories = [
-  'Core',
-  'Mobile', 
-  'Web',
-  'Backend/Infra',
-  'Platform',
-  'Tooling'
+  'Core Languages',
+  'Mobile Development', 
+  'Web Development',
+  'Backend & APIs',
+  'Database & Storage',
+  'Tools & Platforms'
 ];

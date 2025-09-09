@@ -17,16 +17,52 @@ export function SmoothScroll() {
           const elementPosition = element.offsetTop;
           const offsetPosition = elementPosition - headerOffset;
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+          // Use custom easing for smoother scroll
+          const startPosition = window.pageYOffset;
+          const distance = offsetPosition - startPosition;
+          const duration = Math.min(Math.abs(distance) / 2, 1000); // Max 1 second
+          let start: number | null = null;
+
+          const easeInOutCubic = (t: number): number => {
+            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+          };
+
+          const animateScroll = (timestamp: number) => {
+            if (!start) start = timestamp;
+            const progress = Math.min((timestamp - start) / duration, 1);
+            const ease = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+            
+            if (progress < 1) {
+              requestAnimationFrame(animateScroll);
+            }
+          };
+
+          requestAnimationFrame(animateScroll);
         }
       }
     };
 
+    // Optimize scroll performance
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          // Add any scroll-based optimizations here
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      document.removeEventListener('click', handleClick);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return null;

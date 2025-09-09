@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Terminal, Wifi } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, MessageCircle, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { TerminalWindow } from '@/components/ui/terminal-window';
+import { MagneticHover } from '@/components/ui/magnetic-hover';
 import { siteConfig } from '@/site.config';
 import Link from 'next/link';
 
@@ -16,27 +16,24 @@ const contactMethods = [
     label: 'Email',
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'from-blue-50/50 to-cyan-50/50 dark:from-blue-950/20 dark:to-cyan-950/20',
-    borderColor: 'border-blue-200/50 dark:border-blue-800/50',
+    gradient: 'from-blue-500 to-cyan-500',
+    description: 'Drop me a line',
   },
   {
     icon: Phone,
     label: 'Phone',
     value: siteConfig.phone,
     href: `tel:${siteConfig.phone}`,
-    color: 'from-green-500 to-emerald-500',
-    bgColor: 'from-green-50/50 to-emerald-50/50 dark:from-green-950/20 dark:to-emerald-950/20',
-    borderColor: 'border-green-200/50 dark:border-green-800/50',
+    gradient: 'from-green-500 to-emerald-500',
+    description: 'Let\'s talk',
   },
   {
     icon: MapPin,
     label: 'Location',
     value: siteConfig.location,
     href: '#',
-    color: 'from-purple-500 to-pink-500',
-    bgColor: 'from-purple-50/50 to-pink-50/50 dark:from-purple-950/20 dark:to-pink-950/20',
-    borderColor: 'border-purple-200/50 dark:border-purple-800/50',
+    gradient: 'from-purple-500 to-pink-500',
+    description: 'Based in',
   },
 ];
 
@@ -45,242 +42,148 @@ const socialLinks = [
     icon: Github,
     label: 'GitHub',
     href: siteConfig.social.github,
-    color: 'hover:text-gray-900 dark:hover:text-gray-100',
+    gradient: 'from-gray-600 to-gray-800',
+    description: 'View my code',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     href: siteConfig.social.linkedin,
-    color: 'hover:text-blue-600',
+    gradient: 'from-blue-600 to-blue-800',
+    description: 'Connect professionally',
   },
   {
     icon: Twitter,
     label: 'Twitter',
     href: siteConfig.social.twitter,
-    color: 'hover:text-sky-500',
+    gradient: 'from-sky-500 to-sky-700',
+    description: 'Follow my journey',
   },
 ];
 
 export function ContactSection() {
   return (
-    <section className="py-20 bg-black relative overflow-hidden">
-      {/* Clean Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-black to-gray-950" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center space-y-6 mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4 mb-16"
         >
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <Wifi className="h-6 w-6 text-matrix-green" />
-            <span className="text-matrix-green font-mono text-sm uppercase tracking-wider">
-              ESTABLISH_CONNECTION.EXE
-            </span>
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800/50">
+            <MessageCircle className="h-4 w-4" />
+            <span className="text-sm font-medium">Get In Touch</span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-display">
-            Network{' '}
-            <span className="text-cyber-blue font-mono">Interface</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground">
+            Let's Work Together
           </h2>
           
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
-            {'>'} Ready to collaborate? Initialize secure communication channel
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Ready to collaborate on your next mobile project? Let's discuss how we can create exceptional applications together.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Methods */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <TerminalWindow title="contact_info.sys">
-              <div className="space-y-6">
-                <div className="flex items-center space-x-3 mb-6">
-                  <Terminal className="h-5 w-5 text-matrix-green" />
-                  <span className="text-matrix-green font-mono text-lg">COMMUNICATION PROTOCOLS</span>
-                </div>
-                
-                <div className="space-y-4">
-                  {contactMethods.map((method, index) => {
-                    const Icon = method.icon;
-                    return (
-                      <motion.div
-                        key={method.label}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 + index * 0.1 }}
-                        className="group"
-                      >
-                        <Link 
-                          href={method.href}
-                          className="flex items-center space-x-4 p-4 rounded border border-matrix-green-dark hover:border-matrix-green transition-colors bg-matrix-gray-dark/30"
-                        >
-                          <div className="p-2 rounded bg-matrix-green/20 group-hover:bg-matrix-green/30 transition-colors">
-                            <Icon className="h-5 w-5 text-matrix-green" />
-                          </div>
-                          <div>
-                            <div className="font-mono text-white text-sm">{method.label.toUpperCase()}</div>
-                            <div className="text-gray-400 font-mono text-xs group-hover:text-matrix-green transition-colors">
-                              {method.value}
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-
-                {/* Social Links */}
-                <div className="pt-6 border-t border-matrix-gray-dark">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <span className="text-cyber-blue font-mono text-sm">SOCIAL_NETWORKS:</span>
-                  </div>
-                  <div className="flex space-x-3">
-                    {socialLinks.map((social, index) => {
-                      const Icon = social.icon;
-                      return (
-                        <motion.div
-                          key={social.label}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.6 + index * 0.1 }}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Link
-                            href={social.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-12 h-12 rounded border border-matrix-green-dark hover:border-matrix-green bg-matrix-gray-dark/50 hover:bg-matrix-green/20 transition-all group"
-                          >
-                            <Icon className="h-5 w-5 text-gray-400 group-hover:text-matrix-green transition-colors" />
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </TerminalWindow>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            <TerminalWindow title="message_composer.app">
-              <div className="space-y-6">
-                <div className="flex items-center space-x-3 mb-6">
-                  <Send className="h-5 w-5 text-cyber-blue" />
-                  <span className="text-cyber-blue font-mono text-lg">SECURE MESSAGE PROTOCOL</span>
-                </div>
-                
-                <form className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.6 }}
-                    >
-                      <label className="block text-matrix-green font-mono text-xs mb-2">FIRST_NAME:</label>
-                      <Input 
-                        placeholder="john_doe" 
-                        className="bg-matrix-gray-dark border-matrix-green-dark text-white font-mono placeholder:text-gray-500 focus:border-matrix-green" 
-                      />
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.7 }}
-                    >
-                      <label className="block text-matrix-green font-mono text-xs mb-2">LAST_NAME:</label>
-                      <Input 
-                        placeholder="developer" 
-                        className="bg-matrix-gray-dark border-matrix-green-dark text-white font-mono placeholder:text-gray-500 focus:border-matrix-green" 
-                      />
-                    </motion.div>
-                  </div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.8 }}
-                  >
-                    <label className="block text-matrix-green font-mono text-xs mb-2">EMAIL_ADDRESS:</label>
-                    <Input 
-                      type="email" 
-                      placeholder="user@domain.com" 
-                      className="bg-matrix-gray-dark border-matrix-green-dark text-white font-mono placeholder:text-gray-500 focus:border-matrix-green" 
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.9 }}
-                  >
-                    <label className="block text-matrix-green font-mono text-xs mb-2">SUBJECT_LINE:</label>
-                    <Input 
-                      placeholder="project_collaboration" 
-                      className="bg-matrix-gray-dark border-matrix-green-dark text-white font-mono placeholder:text-gray-500 focus:border-matrix-green" 
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.0 }}
-                  >
-                    <label className="block text-matrix-green font-mono text-xs mb-2">MESSAGE_BODY:</label>
-                    <Textarea 
-                      placeholder="Enter your message here..." 
-                      rows={5}
-                      className="bg-matrix-gray-dark border-matrix-green-dark text-white font-mono placeholder:text-gray-500 focus:border-matrix-green resize-none"
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.1 }}
-                  >
-                    <Button className="w-full bg-transparent border-2 border-matrix-green text-matrix-green hover:bg-matrix-green hover:text-black font-mono group shadow-neon-green">
-                      <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                      TRANSMIT_MESSAGE
-                    </Button>
-                  </motion.div>
-                  
-                  {/* Status Indicator */}
-                  <div className="flex items-center justify-between text-xs font-mono text-gray-500 pt-4 border-t border-matrix-gray-dark">
-                    <span>Status: Ready for transmission</span>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 rounded-full bg-matrix-green animate-pulse"></div>
-                      <span>Secure connection established</span>
+        {/* Contact Methods */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {contactMethods.map((method, index) => {
+            const Icon = method.icon;
+            return (
+              <motion.div
+                key={method.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="border border-border/50 hover:border-border hover:shadow-lg transition-all duration-300 bg-card text-center">
+                  <CardContent className="p-6">
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${method.gradient} flex items-center justify-center mx-auto mb-4`}>
+                      <Icon className="h-6 w-6 text-white" />
                     </div>
-                  </div>
-                </form>
-              </div>
-            </TerminalWindow>
-          </motion.div>
+                    <h3 className="font-semibold text-foreground mb-2">{method.label}</h3>
+                    <p className="text-sm text-muted-foreground mb-3">{method.description}</p>
+                    <Link 
+                      href={method.href}
+                      className="text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                    >
+                      {method.value}
+                    </Link>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-4 mb-12"
+        >
+          <h3 className="text-xl font-semibold text-foreground">Connect With Me</h3>
+          <div className="flex justify-center space-x-4">
+            {socialLinks.map((social, index) => {
+              const Icon = social.icon;
+              return (
+                <motion.div
+                  key={social.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                >
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={social.href} target="_blank" rel="noopener noreferrer">
+                      <Icon className="h-4 w-4 mr-2" />
+                      {social.label}
+                    </Link>
+                  </Button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center"
+        >
+          <Card className="border border-border/50 bg-card max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <h3 className="text-xl font-semibold text-foreground mb-4">
+                Ready to Start Your Project?
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Let's discuss your mobile app requirements and create something amazing together.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link href={`mailto:${siteConfig.email}`}>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Send Email
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link href={`tel:${siteConfig.phone}`}>
+                    <Phone className="mr-2 h-4 w-4" />
+                    Call Now
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </section>
   );
