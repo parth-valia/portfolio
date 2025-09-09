@@ -102,23 +102,19 @@ export default function AboutPage() {
                 <CardContent>
                   <div className="space-y-4 text-muted-foreground">
                     <p>
-                      I'm a passionate React Native developer with 2.8+ years of experience building 
-                      cross-platform mobile applications that make a real difference in people's lives. 
-                      My journey began during university when I discovered the power of creating apps 
-                      that could reach millions of users across both iOS and Android platforms.
+                      React Native developer with 2.8+ years of experience crafting cross‑platform apps that 
+                      improve engagement and performance. I collaborate closely with design, backend, and product 
+                      teams to ship reliable features and measurable outcomes.
                     </p>
                     <p>
-                      Throughout my career, I've had the privilege of working on diverse projects—from 
-                      hyperlocal discovery apps that connect communities to devotional streaming platforms 
-                      that serve thousands of users daily. What drives me most is the intersection of 
-                      performance and user experience, ensuring that every app I build is not just 
-                      functional, but delightful to use.
+                      Recent highlights include launching multiple production apps, reducing crash rates by 30%,
+                      accelerating responsiveness by 35% through load-time and render optimizations, and coaching
+                      junior developers through reviews and pairing.
                     </p>
                     <p>
-                      I believe in continuous learning and staying at the forefront of mobile development. 
-                      Whether it's optimizing FlatList performance, implementing complex push notification 
-                      systems, or mentoring fellow developers, I'm always looking for ways to push the 
-                      boundaries of what's possible in mobile development.
+                      I’m proficient with TypeScript, Redux, Zustand, REST APIs, AWS CLI, and notification systems
+                      (FCM/OneSignal), with a strong focus on FlatList/UI performance, offline-first patterns, and
+                      clean, maintainable code.
                     </p>
                   </div>
                 </CardContent>

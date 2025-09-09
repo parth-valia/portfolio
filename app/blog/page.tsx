@@ -9,37 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll';
+import { blogPosts as postsData } from '@/content/blog';
+import { HoverTilt } from '@/components/ui/hover-tilt';
 
-// Mock blog posts - in a real app, these would come from MDX files
-const blogPosts = [
-  {
-    slug: 'flatlist-performance-playbook',
-    title: 'FlatList Performance Playbook: Optimizing React Native Lists',
-    summary: 'Complete guide to optimizing FlatList performance with windowing, getItemLayout, memoization, and React Native Reanimated techniques.',
-    date: '2024-01-15',
-    tags: ['React Native', 'Performance', 'FlatList', 'Optimization'],
-    coverImage: '/images/blog/flatlist-performance.jpg',
-    readingTime: '8 min read',
-  },
-  {
-    slug: 'push-notifications-react-native',
-    title: 'Push Notifications in React Native: FCM vs OneSignal Deep Dive',
-    summary: 'Comprehensive comparison of Firebase Cloud Messaging and OneSignal, including implementation patterns, background handling, and rich media support.',
-    date: '2024-01-08',
-    tags: ['React Native', 'Push Notifications', 'FCM', 'OneSignal'],
-    coverImage: '/images/blog/push-notifications.jpg',
-    readingTime: '12 min read',
-  },
-  {
-    slug: 'redux-to-zustand-migration',
-    title: 'From Redux to Zustand: When, Why, and How to Make the Switch',
-    summary: 'Learn when Zustand makes sense over Redux, migration patterns, common pitfalls to avoid, and best practices for state management in React Native apps.',
-    date: '2023-12-28',
-    tags: ['React Native', 'State Management', 'Redux', 'Zustand'],
-    coverImage: '/images/blog/redux-zustand.jpg',
-    readingTime: '10 min read',
-  },
-];
+const blogPosts = postsData;
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -85,11 +58,9 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map((post, index) => (
             <RevealOnScroll key={post.slug} delay={index * 0.1}>
-              <motion.div
-                whileHover={{ y: -8 }}
-                className="h-full"
-              >
-                <Card className="h-full overflow-hidden group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300">
+              <motion.div whileHover={{ y: -4 }} className="h-full">
+                <HoverTilt className="h-full">
+                  <Card className="h-full overflow-hidden group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300">
                   <Link href={`/blog/${post.slug}`}>
                     <div className="aspect-video relative overflow-hidden">
                       <Image
@@ -143,7 +114,8 @@ export default function BlogPage() {
                       </div>
                     </CardContent>
                   </Link>
-                </Card>
+                  </Card>
+                </HoverTilt>
               </motion.div>
             </RevealOnScroll>
           ))}

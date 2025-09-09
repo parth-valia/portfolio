@@ -19,7 +19,7 @@ export default function ExperiencePage() {
               Professional Experience
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              My journey as a React Native developer, building impactful mobile applications 
+              My journey as a React Native developer, building impactful mobile applications
               and leading technical initiatives across different organizations.
             </p>
           </div>
@@ -28,7 +28,13 @@ export default function ExperiencePage() {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:transform md:-translate-x-0.5" />
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2 origin-top"
+          />
 
           <div className="space-y-12">
             {experience.map((exp, index) => (
@@ -39,14 +45,14 @@ export default function ExperiencePage() {
                   {/* Timeline dot */}
                   <motion.div 
                     className="absolute left-4 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-background md:transform md:-translate-x-1/2 z-10"
-                    whileHover={{ scale: 1.2 }}
+                    // whileHover={{ scale: 1.2 }}
                   />
 
                   {/* Content */}
-                  <motion.div 
+                  <motion.div
                     className={`w-full md:w-1/2 ml-12 md:ml-0 ${
                       index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'
-                    }`}
+                      }`}
                     whileHover={{ y: -4 }}
                   >
                     <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300">
@@ -61,7 +67,7 @@ export default function ExperiencePage() {
                               </h3>
                             </div>
                             <h4 className="text-lg font-semibold mb-2">{exp.role}</h4>
-                            
+
                             <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-sm text-muted-foreground space-y-1 sm:space-y-0">
                               <div className="flex items-center space-x-2">
                                 <Calendar className="h-4 w-4" />
@@ -110,7 +116,7 @@ export default function ExperiencePage() {
         <RevealOnScroll delay={0.3}>
           <div className="mt-20">
             <h2 className="text-3xl font-bold mb-8 text-center">Education</h2>
-            
+
             <div className="max-w-2xl mx-auto">
               <Card className="border-0 shadow-md">
                 <CardContent className="p-6">
@@ -121,7 +127,7 @@ export default function ExperiencePage() {
                         Veer Narmad South Gujarat University (VNSGU)
                       </h3>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <p className="font-medium">Bachelor of Technology - Information Technology</p>
                       <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-sm text-muted-foreground space-y-1 sm:space-y-0">

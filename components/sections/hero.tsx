@@ -2,140 +2,259 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Download, Github, MapPin } from 'lucide-react';
+import { ArrowRight, Download, Github, MapPin, Terminal, Code, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AnimatedText } from '@/components/ui/animated-text';
-import { Metric } from '@/components/ui/metric';
+import { MatrixBackground } from '@/components/ui/matrix-background';
+import { TypewriterText } from '@/components/ui/typewriter-text';
+import { TerminalWindow } from '@/components/ui/terminal-window';
 import { siteConfig } from '@/site.config';
 
-const metrics = [
-  { label: 'Years Experience', value: '2.8+', change: '+22% MAU Impact' },
-  { label: 'Apps Shipped', value: '8+', change: '50K+ Downloads' },
-  { label: 'Crash Reduction', value: '30%', change: 'Performance Focus' },
+const roles = [
+  'React Native Developer',
+  'Mobile App Architect', 
+  'Cross-Platform Engineer',
+  'Performance Optimizer',
+  'Code Craftsman'
+];
+
+const terminalCommands = [
+  '$ whoami',
+  '> parth-valia',
+  '$ cat skills.txt',
+  '> React Native | TypeScript | Redux',
+  '> AWS | Firebase | Performance Tuning',
+  '$ ls achievements/',
+  '> 30% crash reduction achieved ✓',
+  '> 8+ apps shipped to production ✓',
+  '> 50K+ downloads generated ✓',
+  '$ status',
+  '> Ready for next challenge...'
 ];
 
 export function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-blue-950/20 dark:via-background dark:to-purple-950/20" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_500px_300px_at_50%_-30%,rgba(120,119,198,0.1),transparent)] dark:bg-[radial-gradient(ellipse_500px_300px_at_50%_-30%,rgba(120,119,198,0.05),transparent)]" />
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
+      {/* Clean Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-gray-950" />
+      
+      {/* Subtle Accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.05),transparent_70%)]" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Location */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="flex items-center justify-center space-x-2 text-muted-foreground"
-          >
-            <MapPin className="h-4 w-4" />
-            <span className="text-sm">{siteConfig.location}</span>
-          </motion.div>
-
-          {/* Main heading */}
-          <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
+          
+          {/* Left Side - Main Content */}
+          <div className="space-y-8">
+            {/* Status Indicator */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg font-medium text-muted-foreground"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex items-center space-x-3"
             >
-              Hi, I'm
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 rounded-full bg-matrix-green animate-pulse"></div>
+                <span className="text-matrix-green font-mono text-sm">ONLINE</span>
+              </div>
+              <div className="h-4 w-px bg-matrix-green-dark"></div>
+              <div className="flex items-center space-x-2 text-matrix-green-dark">
+                <MapPin className="h-4 w-4" />
+                <span className="font-mono text-sm">{siteConfig.location}</span>
+              </div>
             </motion.div>
-            
-            <AnimatedText
-              text={siteConfig.name}
-              className="text-4xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent"
-              delay={0.3}
-            />
-            
-            <AnimatedText
-              text={siteConfig.title}
-              className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground"
-              delay={0.5}
-            />
+
+            {/* Main Heading */}
+            <div className="space-y-6">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="font-mono text-matrix-green text-lg"
+              >
+                {'>'} Hello World! I'm
+              </motion.div>
+              
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="text-4xl sm:text-6xl lg:text-7xl font-bold text-white font-display"
+              >
+                {siteConfig.name}
+                <motion.span 
+                  className="inline-block w-1 h-16 bg-matrix-green ml-2"
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                />
+              </motion.h1>
+              
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-mono">
+                <TypewriterText 
+                  texts={roles}
+                  className="text-cyber-blue"
+                />
+              </div>
+            </div>
+
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2 }}
+              className="space-y-4"
+            >
+              <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
+                Crafting exceptional mobile experiences with{' '}
+                <span className="text-matrix-green font-mono">React Native</span>. 
+                Specialized in performance optimization, crash reduction, and scalable architecture.
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                {['React Native', 'TypeScript', 'Performance', 'AWS'].map((skill, index) => (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.4 + index * 0.1 }}
+                    className="px-3 py-1 bg-matrix-gray-dark border border-matrix-green-dark rounded text-matrix-green font-mono text-sm"
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-matrix-green hover:bg-matrix-green-dark text-black font-mono group border-0 shadow-neon-green"
+              >
+                <Link href="#projects">
+                  <Code className="mr-2 h-5 w-5" />
+                  View Projects
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="lg" 
+                asChild
+                className="border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black font-mono group"
+              >
+                <Link href="/resume.pdf" target="_blank">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Resume
+                </Link>
+              </Button>
+              
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                asChild
+                className="text-gray-400 hover:text-matrix-green font-mono group"
+              >
+                <Link href={siteConfig.github} target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  GitHub
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.0 }}
+              className="grid grid-cols-3 gap-6 pt-8 border-t border-matrix-gray-dark"
+            >
+              <div className="text-center">
+                <div className="text-2xl font-bold text-matrix-green font-mono">2.8+</div>
+                <div className="text-sm text-gray-400 font-mono">Years Exp</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-cyber-blue font-mono">8+</div>
+                <div className="text-sm text-gray-400 font-mono">Apps Shipped</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-cyber-purple font-mono">30%</div>
+                <div className="text-sm text-gray-400 font-mono">Crash Reduction</div>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
-          >
-            Mobile Developer with 2.8+ years building cross-platform apps in React Native. 
-            Cut crash rates by 30%, boosted engagement, and improved app performance through 
-            TypeScript, Redux/Zustand, REST APIs, AWS CLI, and push notifications.
-          </motion.p>
-
-          {/* CTA Buttons */}
+          {/* Right Side - Terminal Window */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.0 }}
+            className="hidden lg:block"
           >
-            <Button asChild size="lg" className="group">
-              <Link href="/projects">
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/resume.pdf" target="_blank">
-                <Download className="mr-2 h-4 w-4" />
-                Download Resume
-              </Link>
-            </Button>
-            
-            <Button variant="ghost" size="lg" asChild>
-              <Link href={siteConfig.github} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-2 h-4 w-4" />
-                GitHub
-              </Link>
-            </Button>
-          </motion.div>
-
-          {/* Metrics */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-16 border-t"
-          >
-            {metrics.map((metric, index) => (
-              <Metric
-                key={metric.label}
-                label={metric.label}
-                value={metric.value}
-                change={metric.change}
-                changeType="positive"
-              />
-            ))}
+            <TerminalWindow title="portfolio.exe">
+              <div className="space-y-2">
+                {terminalCommands.map((command, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2.2 + index * 0.3 }}
+                    className={`font-mono text-sm ${
+                      command.startsWith('$') 
+                        ? 'text-cyber-blue' 
+                        : command.startsWith('>') 
+                        ? 'text-matrix-green' 
+                        : 'text-gray-400'
+                    }`}
+                  >
+                    {command}
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 5.5 }}
+                  className="flex items-center space-x-2 mt-4"
+                >
+                  <span className="text-cyber-blue font-mono">$</span>
+                  <motion.div
+                    className="w-2 h-4 bg-matrix-green"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                  />
+                </motion.div>
+              </div>
+            </TerminalWindow>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 3.0 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center"
+          className="flex flex-col items-center space-y-2"
         >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-muted-foreground/50 rounded-full mt-2"
-          />
+          <div className="text-matrix-green font-mono text-xs">SCROLL</div>
+          <div className="w-6 h-10 border-2 border-matrix-green rounded-full flex justify-center">
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-1 h-3 bg-matrix-green rounded-full mt-2"
+            />
+          </div>
         </motion.div>
       </motion.div>
     </section>

@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Github, Mail, Phone, MapPin, Heart } from 'lucide-react';
+import { Github, Mail, Phone, MapPin, Heart, Linkedin } from 'lucide-react';
+import { IconXLogo } from '@/components/ui/icons';
 import { siteConfig } from '@/site.config';
 
 export function Footer() {
@@ -67,7 +68,7 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-sm font-semibold">Connect</h4>
             <div className="flex items-center space-x-4">
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href={siteConfig.github}
                   target="_blank"
@@ -77,18 +78,38 @@ export function Footer() {
                   <Github className="h-5 w-5" />
                 </Link>
               </motion.div>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href={siteConfig.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href={siteConfig.social.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <IconXLogo className="h-5 w-5" />
+                </Link>
+              </motion.div>
             </div>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 {siteConfig.name}. All rights reserved.
+            {/* © 2024 {siteConfig.name}. All rights reserved. */}
           </p>
           <p className="text-sm text-muted-foreground flex items-center space-x-1 mt-2 sm:mt-0">
             <span>Made with</span>
-            <Heart className="h-4 w-4 text-red-500" />
-            <span>using Next.js</span>
+            <Heart className="h-4 w-4 text-red-500 fill-red-500" />
+            <span>by Parth Valia</span>
           </p>
         </div>
       </div>

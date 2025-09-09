@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,12 +12,46 @@ import { Badge } from '@/components/ui/badge';
 import { TechPill } from '@/components/ui/tech-pill';
 import { RevealOnScroll } from '@/components/ui/reveal-on-scroll';
 import { projects } from '@/content/projects';
+import { HoverTilt } from '@/components/ui/hover-tilt';
 
 const categories = ['all', 'mobile', 'web', 'blockchain'];
+
+type Repo = {
+  id: number;
+  name: string;
+  full_name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  updated_at: string;
+  topics: string[];
+};
 
 export default function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [repos, setRepos] = useState<Repo[]>([]);
+  const [loadingRepos, setLoadingRepos] = useState<boolean>(true);
+  const [repoError, setRepoError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchRepos = async () => {
+      try {
+        setLoadingRepos(true);
+        const res = await fetch('/api/github');
+        if (!res.ok) throw new Error('Failed to load repositories');
+        const data = await res.json();
+        setRepos((data?.repos || []).slice(0, 9));
+      } catch (e: any) {
+        setRepoError(e?.message || 'Error loading repositories');
+      } finally {
+        setLoadingRepos(false);
+      }
+    };
+    fetchRepos();
+  }, []);
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -79,11 +113,9 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <RevealOnScroll key={project.slug} delay={index * 0.1}>
-              <motion.div
-                whileHover={{ y: -8 }}
-                className="h-full"
-              >
-                <Card className="h-full overflow-hidden group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300">
+              <motion.div whileHover={{ y: -4 }} className="h-full">
+                <HoverTilt className="h-full">
+                  <Card className="h-full overflow-hidden group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300">
                   <div className="aspect-video relative overflow-hidden">
                     <Image
                       src={project.coverImage}
@@ -182,7 +214,8 @@ export default function ProjectsPage() {
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                  </Card>
+                </HoverTilt>
               </motion.div>
             </RevealOnScroll>
           ))}
@@ -197,6 +230,63 @@ export default function ProjectsPage() {
             </div>
           </RevealOnScroll>
         )}
+
+        {/* GitHub Repositories Section */}
+        <RevealOnScroll delay={0.2}>
+          <div className="mt-24">
+            <div className="text-center space-y-2 mb-8">
+              <h2 className="text-3xl font-bold">Open Source Repos</h2>
+              <p className="text-muted-foreground">Recent public repositories from my GitHub.</p>
+            </div>
+
+            {repoError && (
+              <div className="text-center text-sm text-red-600 mb-6">{repoError}</div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {loadingRepos && (
+                Array.from({ length: 6 }).map((_, idx) => (
+                  <Card key={idx} className="border-0 shadow-md h-40" />
+                ))
+              )}
+
+              {!loadingRepos && repos.map((repo) => (
+                <Card key={repo.id} className="border-0 shadow-md hover:shadow-lg transition-all duration-300">
+                  <CardContent className="p-6">
+                    <div className="space-y-3">
+                      <div className="flex items-start justify-between">
+                        <h3 className="text-lg font-semibold">
+                          {repo.name}
+                        </h3>
+                        <Badge variant="secondary" className="ml-2">
+                          {repo.language || 'Other'}
+                        </Badge>
+                      </div>
+                      {repo.description && (
+                        <p className="text-sm text-muted-foreground line-clamp-2">{repo.description}</p>
+                      )}
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <div className="flex items-center gap-3">
+                          <span className="flex items-center gap-1"><Star className="h-3 w-3" /> {repo.stargazers_count}</span>
+                          <span>Forks {repo.forks_count}</span>
+                        </div>
+                        <span>Updated {new Date(repo.updated_at).toLocaleDateString()}</span>
+                      </div>
+                      <div className="pt-2">
+                        <Button asChild size="sm" variant="ghost">
+                          <Link href={repo.html_url} target="_blank" rel="noopener noreferrer">
+                            View Repo
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
       </div>
     </div>
   );
