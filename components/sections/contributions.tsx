@@ -13,17 +13,14 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
   const currentYear = new Date().getFullYear();
   
   return (
-    <section className="py-20 bg-gray-950 relative overflow-hidden">
-      {/* Clean Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-950 to-black" />
-      
+    <section className="py-8 sm:py-12 lg:py-20 relative overflow-hidden">      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center space-y-6 mb-16"
+          className="text-center space-y-4 sm:space-y-6 mb-8 sm:mb-12 lg:mb-16"
         >
           <div className="flex items-center justify-center space-x-3 mb-4">
             <Activity className="h-6 w-6 text-matrix-green" />
@@ -32,12 +29,12 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
             </span>
           </div>
           
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-display">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-display">
             Code{' '}
-            <span className="text-matrix-green font-mono">Frequency</span>
+            <span className="text-cyber-blue font-mono">Frequency</span>
           </h2>
           
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto font-mono">
             {'>'} Tracking daily commits and contributions across the development ecosystem
           </p>
         </motion.div>
@@ -64,7 +61,7 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
               </div>
 
               {/* GitHub Calendar */}
-              <div className="relative">
+              <div className="relative flex items-center justify-center">
                 <GitHubCalendar
                   username={username}
                   colorScheme="dark"
@@ -80,13 +77,13 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
               </div>
 
               {/* Stats Display */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-matrix-gray-dark">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pt-4 border-t border-matrix-gray-dark">
                 <div className="text-center space-y-1">
                   <div className="flex items-center justify-center space-x-2">
                     <Github className="h-4 w-4 text-matrix-green" />
                     <span className="text-matrix-green font-mono text-sm">COMMITS</span>
                   </div>
-                  <div className="text-2xl font-bold text-white font-mono">1000+</div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white font-mono">1000+</div>
                   <div className="text-xs text-gray-400 font-mono">this year</div>
                 </div>
 
@@ -95,7 +92,7 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
                     <Terminal className="h-4 w-4 text-cyber-blue" />
                     <span className="text-cyber-blue font-mono text-sm">STREAK</span>
                   </div>
-                  <div className="text-2xl font-bold text-white font-mono">365+</div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white font-mono">365+</div>
                   <div className="text-xs text-gray-400 font-mono">days active</div>
                 </div>
 
@@ -104,7 +101,7 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
                     <Code className="h-4 w-4 text-cyber-purple" />
                     <span className="text-cyber-purple font-mono text-sm">REPOS</span>
                   </div>
-                  <div className="text-2xl font-bold text-white font-mono">50+</div>
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white font-mono">50+</div>
                   <div className="text-xs text-gray-400 font-mono">projects</div>
                 </div>
               </div>
@@ -124,7 +121,7 @@ export function ContributionsSection({ username = 'parth-valia' }: { username?: 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-12"
         >
           <Button 
             asChild 

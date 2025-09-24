@@ -44,9 +44,13 @@ export interface BlogPost {
   slug: string;
   title: string;
   summary: string;
+  excerpt: string;
   date: string;
   tags: string[];
   coverImage: string;
+  image: string;
   readingTime: string;
+  readTime: string;
   content: string;
+  category: string;
 }

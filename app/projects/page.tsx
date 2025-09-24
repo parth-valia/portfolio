@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, Filter, ExternalLink, Star, Download, ArrowRight } from 'lucide-react';
+import { Search, Filter, ExternalLink, Star, Download, ArrowRight, Github, Smartphone, Apple } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -15,6 +15,13 @@ import { projects } from '@/content/projects';
 import { HoverTilt } from '@/components/ui/hover-tilt';
 
 const categories = ['all', 'mobile', 'web', 'blockchain'];
+
+// Consistent date formatting to prevent hydration errors
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
 
 type Repo = {
   id: number;
@@ -55,11 +62,11 @@ export default function ProjectsPage() {
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.subtitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         project.stack.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+      project.subtitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.stack.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+
     const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -69,11 +76,17 @@ export default function ProjectsPage() {
         {/* Header */}
         <RevealOnScroll>
           <div className="text-center space-y-4 mb-12">
-            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              My Projects
-            </h1>
+          <motion.h2
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-display mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Featured{' '}
+              <span className="text-cyber-blue font-mono">Projects</span>
+            </motion.h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A comprehensive showcase of mobile and web applications I've built, 
+              A comprehensive showcase of mobile and web applications I've built,
               from hyperlocal discovery to blockchain wallets.
             </p>
           </div>
@@ -91,7 +104,7 @@ export default function ProjectsPage() {
                 className="pl-10"
               />
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <Filter className="h-4 w-4 text-muted-foreground" />
               {categories.map((category) => (
@@ -116,95 +129,122 @@ export default function ProjectsPage() {
               <motion.div whileHover={{ y: -4 }} className="h-full">
                 <HoverTilt className="h-full">
                   <Card className="h-full overflow-hidden group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-300">
-                  <div className="aspect-video relative overflow-hidden">
-                    <Image
-                      src={project.coverImage}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <Badge variant="secondary" className="mb-2">
-                        {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
-                      </Badge>
-                      {project.impact.rating && (
-                        <div className="flex items-center space-x-1 text-white text-sm">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                          <span>{project.impact.rating}</span>
-                          {project.impact.installs && (
-                            <>
-                              <span className="mx-2">•</span>
-                              <Download className="h-4 w-4" />
-                              <span>{project.impact.installs}</span>
-                            </>
+                    {/* Main clickable area for project details */}
+                    <Link href={`/projects/${project.slug}`} className="block">
+                      <div className="aspect-video relative overflow-hidden">
+                        <Image
+                          src={project.coverImage}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <Badge variant="secondary" className="mb-2">
+                            {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                          </Badge>
+                          {project.impact.rating && (
+                            <div className="flex items-center space-x-1 text-white text-sm">
+                              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                              <span>{project.impact.rating}</span>
+                              {project.impact.installs && (
+                                <>
+                                  <span className="mx-2">•</span>
+                                  <Download className="h-4 w-4" />
+                                  <span>{project.impact.installs}</span>
+                                </>
+                              )}
+                            </div>
                           )}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm mt-1">
-                          {project.subtitle}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {project.timeframe}
-                        </p>
                       </div>
-                      
-                      <p className="text-sm text-muted-foreground line-clamp-2">
-                        {project.highlights[0]}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2">
-                        {project.stack.slice(0, 4).map((tech) => (
-                          <TechPill key={tech} tech={tech} variant="outlined" />
-                        ))}
-                        {project.stack.length > 4 && (
-                          <span className="text-xs text-muted-foreground self-center">
-                            +{project.stack.length - 4}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="flex items-center justify-between pt-2">
+
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          <div>
+                            <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
+                              {project.title}
+                            </h3>
+                            <p className="text-muted-foreground text-sm mt-1">
+                              {project.subtitle}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {project.timeframe}
+                            </p>
+                          </div>
+
+                          <p className="text-sm text-muted-foreground line-clamp-2">
+                            {project.highlights[0]}
+                          </p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {project.stack.slice(0, 4).map((tech) => (
+                              <TechPill key={tech} tech={tech} variant="outlined" />
+                            ))}
+                            {project.stack.length > 4 && (
+                              <span className="text-xs text-muted-foreground self-center">
+                                +{project.stack.length - 4}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Link>
+
+                    {/* Action buttons - Separate clickable areas to prevent nesting */}
+                    <div className="px-6 pb-6">
+                      <div className="flex items-center justify-between pt-2 border-t">
                         <div className="flex items-center space-x-2">
                           {project.links.playStore && (
                             <Button variant="ghost" size="sm" asChild>
-                              <Link href={project.links.playStore} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4" />
+                              <Link 
+                                href={project.links.playStore} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Smartphone className="h-4 w-4" />
                               </Link>
                             </Button>
                           )}
                           {project.links.appStore && (
                             <Button variant="ghost" size="sm" asChild>
-                              <Link href={project.links.appStore} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4" />
+                              <Link 
+                                href={project.links.appStore} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Apple className="h-4 w-4" />
                               </Link>
                             </Button>
                           )}
                           {project.links.web && (
                             <Button variant="ghost" size="sm" asChild>
-                              <Link href={project.links.web} target="_blank" rel="noopener noreferrer">
+                              <Link 
+                                href={project.links.web} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
                                 <ExternalLink className="h-4 w-4" />
                               </Link>
                             </Button>
                           )}
                           {project.links.github && (
                             <Button variant="ghost" size="sm" asChild>
-                              <Link href={project.links.github} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-4 w-4" />
+                              <Link 
+                                href={project.links.github} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <Github className="h-4 w-4" />
                               </Link>
                             </Button>
                           )}
                         </div>
-                        
+
                         <Button variant="ghost" size="sm" asChild className="group/btn">
                           <Link href={`/projects/${project.slug}`}>
                             Details
@@ -213,7 +253,6 @@ export default function ProjectsPage() {
                         </Button>
                       </div>
                     </div>
-                  </CardContent>
                   </Card>
                 </HoverTilt>
               </motion.div>
@@ -270,7 +309,7 @@ export default function ProjectsPage() {
                           <span className="flex items-center gap-1"><Star className="h-3 w-3" /> {repo.stargazers_count}</span>
                           <span>Forks {repo.forks_count}</span>
                         </div>
-                        <span>Updated {new Date(repo.updated_at).toLocaleDateString()}</span>
+                        <span>Updated {formatDate(repo.updated_at)}</span>
                       </div>
                       <div className="pt-2">
                         <Button asChild size="sm" variant="ghost">

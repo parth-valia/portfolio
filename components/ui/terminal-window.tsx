@@ -26,13 +26,15 @@ export function TerminalWindow({ children, title = 'terminal', className = '' }:
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <span className="text-matrix-green text-sm font-mono ml-4">{title}</span>
+          <div className="flex items-center sm:text-wrap">
+            <span className="flex text-wrap text-matrix-green text-sm font-mono ml-4 mr-2">{title}</span>
+          </div>
         </div>
         <div className="text-matrix-green-dark text-xs font-mono">
           user@portfolio:~$
         </div>
       </div>
-      
+
       {/* Terminal Content */}
       <div className="p-4 font-mono text-matrix-green bg-matrix-black">
         {children}
