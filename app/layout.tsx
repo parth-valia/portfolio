@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { PageTransition } from '@/components/ui/page-transition';
 import { SmoothScroll } from '@/components/ui/smooth-scroll';
+import { FirstVisitProvider } from '@/components/ui/first-visit-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,13 +28,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="dark">
-          <SmoothScroll />
-          <Header />
-          <PageTransition>
-            <main className="min-h-screen">{children}</main>
-          </PageTransition>
-          <Footer />
-          <Toaster />
+          <FirstVisitProvider>
+            <SmoothScroll />
+            <Header />
+            <PageTransition>
+              <main className="min-h-screen">{children}</main>
+            </PageTransition>
+            <Footer />
+            <Toaster />
+          </FirstVisitProvider>
         </ThemeProvider>
       </body>
     </html>

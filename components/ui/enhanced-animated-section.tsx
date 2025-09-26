@@ -2,6 +2,7 @@
 
 import { motion, useInView, useAnimation, Variants, UseInViewOptions } from 'framer-motion';
 import { useRef, useEffect, ReactNode, useState } from 'react';
+import { useFirstVisit } from '@/components/ui/first-visit-provider';
 
 interface EnhancedAnimatedSectionProps {
   children: ReactNode;
@@ -230,6 +231,7 @@ export function EnhancedAnimatedSection({
   const isInView = useInView(ref, viewport);
   const controls = useAnimation();
   const [isMobile, setIsMobile] = useState(false);
+  const { shouldAnimate } = useFirstVisit();
 
   // Check if device is mobile
   useEffect(() => {
@@ -244,6 +246,12 @@ export function EnhancedAnimatedSection({
   }, []);
 
   useEffect(() => {
+    if (!shouldAnimate) {
+      // Immediately set visible and do not update further
+      controls.set('visible');
+      return;
+    }
+
     if (isInView) {
       controls.start('visible');
     } else {
@@ -253,7 +261,7 @@ export function EnhancedAnimatedSection({
         controls.start('exit');
       }
     }
-  }, [isInView, controls, isMobile, id]);
+  }, [isInView, controls, isMobile, id, shouldAnimate]);
 
   const variants = matrixVariants[animationType];
 
@@ -263,7 +271,7 @@ export function EnhancedAnimatedSection({
       id={id}
       className={className}
       custom={direction}
-      initial="hidden"
+      initial={shouldAnimate ? 'hidden' : 'visible'}
       animate={controls}
       variants={variants}
       style={{

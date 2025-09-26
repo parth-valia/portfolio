@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { useFirstVisit } from '@/components/ui/first-visit-provider';
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -29,6 +30,7 @@ export function ScrollReveal({
   });
   const controls = useAnimation();
   const [hasAnimated, setHasAnimated] = useState(false);
+  const { shouldAnimate } = useFirstVisit();
 
   const getInitialPosition = () => {
     switch (direction) {
@@ -74,6 +76,12 @@ export function ScrollReveal({
   };
 
   useEffect(() => {
+    if (!shouldAnimate) {
+      // Immediately set visible once and bail out of further updates
+      controls.set({ ...getAnimatePosition() });
+      return;
+    }
+
     if (isInView) {
       controls.start({
         ...getAnimatePosition(),
@@ -94,12 +102,12 @@ export function ScrollReveal({
         },
       });
     }
-  }, [isInView, controls, delay, duration, hasAnimated, direction, distance]);
+  }, [isInView, controls, delay, duration, hasAnimated, direction, distance, shouldAnimate]);
 
   return (
     <motion.div
       ref={ref}
-      initial={getInitialPosition()}
+      initial={shouldAnimate ? getInitialPosition() : getAnimatePosition()}
       animate={controls}
       className={className}
     >

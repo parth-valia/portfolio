@@ -2,6 +2,7 @@
 
 import { motion, useInView, Variants } from 'framer-motion';
 import { useRef, ReactNode } from 'react';
+import { useFirstVisit } from '@/components/ui/first-visit-provider';
 
 interface SectionAnimatorProps {
   children: ReactNode;
@@ -25,6 +26,7 @@ export function SectionAnimator({
     amount: 0.2,
     margin: "-10% 0px -10% 0px"
   });
+  const { shouldAnimate } = useFirstVisit();
 
   const getAnimationVariants = (): Variants => {
     switch (animationType) {
@@ -106,8 +108,8 @@ export function SectionAnimator({
       id={id}
       className={`relative ${className}`}
       variants={getAnimationVariants()}
-      initial="hidden"
-      animate={isInView ? "visible" : "exit"}
+      initial={shouldAnimate ? "hidden" : "visible"}
+      animate={shouldAnimate ? (isInView ? "visible" : "exit") : "visible"}
     >
       {/* Matrix-style focus indicator */}
       {animationType === 'matrix' && (
@@ -115,7 +117,7 @@ export function SectionAnimator({
           className="absolute inset-0 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ 
-            opacity: isInView ? 0.1 : 0,
+            opacity: shouldAnimate ? (isInView ? 0.1 : 0) : 0,
             background: isInView 
               ? 'radial-gradient(circle at center, rgba(34,197,94,0.05) 0%, transparent 70%)'
               : 'transparent'
@@ -129,7 +131,7 @@ export function SectionAnimator({
         className="absolute inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ 
-          opacity: isInView ? 1 : 0,
+          opacity: shouldAnimate ? (isInView ? 1 : 0) : 0,
           boxShadow: isInView 
             ? 'inset 0 0 100px rgba(34,197,94,0.02)'
             : 'none'
@@ -163,6 +165,7 @@ export function StaggeredSection({
     amount: 0.15,
     margin: "-5% 0px -5% 0px"
   });
+  const { shouldAnimate } = useFirstVisit();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -212,8 +215,8 @@ export function StaggeredSection({
       id={id}
       className={`relative ${className}`}
       variants={containerVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "exit"}
+      initial={shouldAnimate ? "hidden" : "visible"}
+      animate={shouldAnimate ? (isInView ? "visible" : "exit") : "visible"}
     >
       {/* Matrix focus effect */}
       <motion.div
