@@ -146,8 +146,11 @@ export function Header() {
                         // Already on the dedicated page, stay here
                         return;
                       } else {
-                        // Navigate to home page and scroll to section
-                        router.push(`/#${sectionId}`);
+                        // Navigate to home page then scroll to section
+                        router.push('/');
+                        setTimeout(() => {
+                          smoothScrollTo(sectionId);
+                        }, 100);
                       }
                     } else {
                       router.push(item.href);
@@ -227,11 +230,14 @@ export function Header() {
                           // Already on the dedicated page, stay here
                           return;
                         } else {
-                          // Navigate to home page and scroll to section
-                          router.push(`/#${sectionId}`);
+                          // Navigate to home page then scroll to section
+                          router.push('/');
+                          setTimeout(() => {
+                            smoothScrollTo(sectionId);
+                          }, 100);
                         }
                       } else {
-                        router.push(item.href);
+                        window.location.href = item.href;
                       }
                     }}
                     className={cn(
