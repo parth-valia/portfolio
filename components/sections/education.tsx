@@ -87,7 +87,7 @@ export function EducationSection() {
           className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto font-mono"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
+          viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
           {'>'} Building technical expertise through structured learning and academic excellence

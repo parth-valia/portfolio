@@ -21,14 +21,12 @@ export function MatrixTextReveal({
   glowEffect = true
 }: MatrixTextRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: '-50px' });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
   const controls = useAnimation();
 
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
-    } else {
-      controls.start('hidden');
     }
   }, [isInView, controls]);
 
@@ -155,14 +153,12 @@ export function TerminalText({
   speed?: number;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false });
+  const isInView = useInView(ref, { once: true });
   const controls = useAnimation();
 
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
-    } else {
-      controls.start('hidden');
     }
   }, [isInView, controls]);
 

@@ -148,7 +148,7 @@ export function ContactSection() {
             className="text-xl text-muted-foreground max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             Ready to bring your ideas to life? Let's discuss your next project.

@@ -225,12 +225,13 @@ export function EnhancedAnimatedSection({
   delay = 0,
   distance = 50,
   staggerChildren = 0.1,
-  viewport = { once: false, margin: '-100px 0px -100px 0px', amount: 0.2 }
+  viewport = { once: true, margin: '-100px 0px -100px 0px', amount: 0.2 }
 }: EnhancedAnimatedSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, viewport);
   const controls = useAnimation();
   const [isMobile, setIsMobile] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const { shouldAnimate } = useFirstVisit();
 
   // Check if device is mobile
@@ -254,14 +255,20 @@ export function EnhancedAnimatedSection({
 
     if (isInView) {
       controls.start('visible');
+      if (viewport?.once) {
+        setHasPlayed(true);
+      }
     } else {
+      // If set to animate once and already played, don't animate out/replay
+      if (viewport?.once && hasPlayed) return;
+
       // Only animate out on desktop, not on mobile to prevent gaps
       // Exception: always animate header section
       if (!isMobile || id === 'home') {
         controls.start('exit');
       }
     }
-  }, [isInView, controls, isMobile, id, shouldAnimate]);
+  }, [isInView, controls, isMobile, id, shouldAnimate, viewport, hasPlayed]);
 
   const variants = matrixVariants[animationType];
 

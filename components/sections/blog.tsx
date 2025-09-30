@@ -46,7 +46,7 @@ export function BlogSection() {
             className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             Thoughts, insights, and learnings from my journey in technology

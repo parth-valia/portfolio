@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Menu, X, Github, Phone, Mail, Linkedin } from 'lucide-react';
+import { Menu, X, Github, Phone, Mail, Linkedin, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Magnetic } from '@/components/ui/magnetic';
 import { siteConfig } from '@/site.config';
@@ -17,6 +17,7 @@ export function Header() {
   const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Check if device is mobile
   useEffect(() => {
@@ -49,6 +50,9 @@ export function Header() {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(Math.min(progress, 100));
+
+      // Toggle scroll-to-top button
+      setShowScrollTop(window.scrollY > 300);
 
       // Detect active section
       if (pathname === '/') {
@@ -87,7 +91,12 @@ export function Header() {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
+    <React.Fragment>
     <motion.header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/90 backdrop-blur-md border-b border-matrix-green/20 shadow-lg')}
@@ -260,5 +269,49 @@ export function Header() {
         )}
       </div>
     </motion.header>
+    {/* Scroll To Top Floating Button */}
+    {showScrollTop && (
+      <motion.button
+        onClick={scrollToTop}
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.8, y: 20 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 z-[60] rounded-full p-3 bg-background/80 backdrop-blur border border-matrix-green/30 shadow-neon-green hover:border-matrix-green transition-colors"
+        aria-label="Scroll to top"
+      >
+        <div className="relative w-10 h-10">
+          {/* Circular progress ring */}
+          <svg className="absolute inset-0 w-10 h-10 -rotate-90" viewBox="0 0 36 36">
+            <circle
+              cx="18"
+              cy="18"
+              r="16"
+              fill="none"
+              className="stroke-matrix-green/20"
+              strokeWidth="3"
+            />
+            <motion.circle
+              cx="18"
+              cy="18"
+              r="16"
+              fill="none"
+              className="stroke-matrix-green"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeDasharray={100}
+              // Map 0-100 scrollProgress to strokeDashoffset (reverse so ring fills as you scroll)
+              animate={{ strokeDashoffset: 100 - scrollProgress }}
+              transition={{ duration: 0.2, ease: 'linear' }}
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <ArrowUp className="h-4 w-4 text-matrix-green" />
+          </div>
+        </div>
+      </motion.button>
+    )}
+  </React.Fragment>
   );
 }

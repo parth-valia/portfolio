@@ -65,11 +65,6 @@ export function ExperienceSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-black to-gray-950" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <ScrollReveal
-          direction="up"
-          delay={0.1}
-        >
           <StaggerItem className="text-center mb-16">
             <div className="flex items-center justify-center space-x-3 mb-4">
               <Terminal className="h-6 w-6 text-matrix-green -mt-2" />
@@ -92,7 +87,7 @@ export function ExperienceSection() {
               className="text-xl text-muted-foreground max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
+              viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               Building impactful mobile applications and leading development teams
@@ -280,7 +275,6 @@ export function ExperienceSection() {
               </motion.div>
             </div>
           </div>
-        </ScrollReveal>
       </div>
     </section>
   );
