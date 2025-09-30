@@ -34,7 +34,7 @@ const terminalCommands = [
 export function HeroSection() {
   return (
     <SectionAnimator 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-24 lg:pt-0"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-6 lg:pt-0"
       animationType="matrix"
       duration={1.2}
     >

@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { Menu, X, Github, Phone, Mail, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Magnetic } from '@/components/ui/magnetic';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { siteConfig } from '@/site.config';
 import { cn } from '@/lib/utils';
 
@@ -177,7 +176,6 @@ export function Header() {
                 </Link>
               </Button>
             </Magnetic>
-            {/* <ThemeToggle /> */}
           </div>
 
           {/* Mobile menu button */}
@@ -256,7 +254,6 @@ export function Header() {
                     <Mail className="h-4 w-4" />
                   </Link>
                 </Button>
-                <ThemeToggle />
               </div>
             </div>
           </motion.div>
