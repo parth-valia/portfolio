@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Menu, X, Github, Phone, Mail, Linkedin, ArrowUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,7 @@ export function Header() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -146,10 +147,10 @@ export function Header() {
                         return;
                       } else {
                         // Navigate to home page and scroll to section
-                        window.location.href = `/#${sectionId}`;
+                        router.push(`/#${sectionId}`);
                       }
                     } else {
-                      window.location.href = item.href;
+                      router.push(item.href);
                     }
                   }}
                   className={cn(
@@ -227,10 +228,10 @@ export function Header() {
                           return;
                         } else {
                           // Navigate to home page and scroll to section
-                          window.location.href = `/#${sectionId}`;
+                          router.push(`/#${sectionId}`);
                         }
                       } else {
-                        window.location.href = item.href;
+                        router.push(item.href);
                       }
                     }}
                     className={cn(
