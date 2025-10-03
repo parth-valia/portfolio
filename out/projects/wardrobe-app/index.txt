@@ -1,5 +1,5 @@
 1:HL["/_next/static/css/bb84ade6e2ad1ed7.css","style"]
-0:["s2YY6aTNDR8_GeaPSHigQ",[[["",{"children":["projects",{"children":[["slug","wardrobe-app","d"],{"children":["__PAGE__?{\"slug\":\"wardrobe-app\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/bb84ade6e2ad1ed7.css","precedence":"next"}]],"$L3"]]]]
+0:["R9dbx7_5w5rOU6wficDqf",[[["",{"children":["projects",{"children":[["slug","wardrobe-app","d"],{"children":["__PAGE__?{\"slug\":\"wardrobe-app\"}",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/bb84ade6e2ad1ed7.css","precedence":"next"}]],"$L3"]]]]
 4:I{"id":78800,"chunks":["419:static/chunks/419-72efb6dfcf62cbd7.js","381:static/chunks/381-c9b2f220a41cf842.js","185:static/chunks/app/layout-6c4f1ca02e738f7e.js"],"name":"ThemeProvider","async":false}
 5:I{"id":16628,"chunks":["419:static/chunks/419-72efb6dfcf62cbd7.js","381:static/chunks/381-c9b2f220a41cf842.js","185:static/chunks/app/layout-6c4f1ca02e738f7e.js"],"name":"FirstVisitProvider","async":false}
 6:I{"id":81014,"chunks":["419:static/chunks/419-72efb6dfcf62cbd7.js","381:static/chunks/381-c9b2f220a41cf842.js","185:static/chunks/app/layout-6c4f1ca02e738f7e.js"],"name":"SmoothScroll","async":false}

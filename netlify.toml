@@ -6,6 +6,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# SPA routing - redirect all routes to index.html for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 # Headers for security and performance
 [[headers]]
   for = "/*"
